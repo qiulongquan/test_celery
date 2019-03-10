@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+}
+</style>
+<body>
+<div>
+    <h2>任务执行结果：</h2>
+    <table border="1" class="gridtable">
+        <tr>
+            <td>Task_id</td>
+            <td>第一个加数</td>
+            <td>第二个加数</td>
+            <td>任务状态</td>
+            <td>开始时间</td>
+
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.task_id }}</td>
+            <td>{{ row.first }}</td>
+            <td>{{ row.second }}</td>
+            {% if row.status == 'SUCCESS' %}
+                <td style="color:#00BB00">{{ row.status }}</td>
+            {% elif row.status == 'STARTED'%}
+                <td style="color:#FFCC00">{{ row.status }}</td>
+            {% else %}
+                <td style="color:red">{{ row.status }}</td>
+            {% endif %}
+            <td>{{ row.logdate|date:"Y-m-d H:i:s" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</div>
+</body>
+</html>
